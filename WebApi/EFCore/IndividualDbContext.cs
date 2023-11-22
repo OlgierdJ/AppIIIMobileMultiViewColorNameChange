@@ -22,7 +22,7 @@ namespace TodoWebApi.EFCore
                 entity.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
 
                 entity.Property(e => e.Color).IsRequired();
-                entity.Property(e => e.Relative).HasConversion<int>().IsRequired();
+                entity.Property(e => e.RelativeType).HasConversion<int>().IsRequired();
                 entity.Property(e => e.Name).IsRequired(true);
                 entity.HasIndex(e => e.Name).IsUnique();
             });
