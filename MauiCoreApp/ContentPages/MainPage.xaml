@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MauiCoreApp.ViewModels"
+             xmlns:model="clr-namespace:CoreLib.Models;assembly=CoreLib"
+             xmlns:conv="clr-namespace:MauiCoreApp.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewModel:MainViewModel"
              x:Class="MauiCoreApp.ContentPages.MainPage">
-
+    <ContentPage.Resources>
+        <conv:StringToColorConverter x:Key="stringToColor"/>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
@@ -23,13 +30,39 @@
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+            <ListView Background="LightGray" x:Name="IndividualListView" SelectedItem="{Binding Individual}" ItemsSource="{Binding Individuals}" RefreshCommand="{Binding RefreshListCommand}">
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                                 EventName="ItemSelected"
+                                 Command="{Binding NavigateToEditIndividualCommand}" 
+                                 CommandParameter="{Binding Individual}"
+                                  />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Individual">
 
+                        <TextCell Text="{Binding Name}" TextColor="{Binding Color, Converter={StaticResource stringToColor}, ConverterParameter=Color}">
+
+                        </TextCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                x:Name="AddIndividual"
+                Text="Add Individual"
+                Background="Green"
+                SemanticProperties.Hint="Navigates to the add page"
+                Command="{Binding NavigateToAddIndividualCommand}"
                 HorizontalOptions="Fill" />
+            <Button
+    x:Name="Refresh"
+    Text="Refresh"
+                Background="Pink"
+    SemanticProperties.Hint="Navigates to the edit page"
+    Command="{Binding RefreshListCommand}"
+    HorizontalOptions="Fill" />
+
         </VerticalStackLayout>
     </ScrollView>
 

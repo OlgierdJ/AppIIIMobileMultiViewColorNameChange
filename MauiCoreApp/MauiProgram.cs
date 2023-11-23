@@ -27,9 +27,9 @@ namespace MauiCoreApp
             builder.Services.AddSingleton<MainViewModel>();
 
             builder.Services.AddTransient<AddIndividualPage>();
-            //builder.Services.AddTransient<ViewProcessedNodesViewModel>();
+            builder.Services.AddTransient<AddIndividualViewModel>();
             builder.Services.AddTransient<EditIndividualPage>();
-            //builder.Services.AddTransient<ViewProcessedNodesViewModel>();
+            builder.Services.AddTransient<EditIndividualViewModel>();
 
             //builder.Services.AddTransient<EditIndividualPage>();
 

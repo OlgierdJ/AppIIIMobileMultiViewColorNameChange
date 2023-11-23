@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CoreLib.WebApi
@@ -14,13 +15,14 @@ namespace CoreLib.WebApi
     {
         static readonly HttpClient client = new HttpClient();
         static string controllerPath = "https://localhost:7186/Individual";
+
         public async Task<Individual?> Get(int id)
         {
             try
             {
                 using HttpResponseMessage response = await client.GetAsync(controllerPath+$"/{id}");
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<Individual>();
+                var result = await response.Content.ReadFromJsonAsync<Individual>(options: new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
                 return result;
             }
@@ -37,7 +39,7 @@ namespace CoreLib.WebApi
             {
                 using HttpResponseMessage response = await client.GetAsync(controllerPath);
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<List<Individual>>();
+                var result = await response.Content.ReadFromJsonAsync<List<Individual>>(options:new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive=true });
 
                 return result;
             }
@@ -54,7 +56,7 @@ namespace CoreLib.WebApi
             {
                 using HttpResponseMessage response = await client.PostAsJsonAsync(controllerPath, individual);
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<Individual>();
+                var result = await response.Content.ReadFromJsonAsync<Individual>(options: new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
                 return result;
             }
@@ -71,7 +73,7 @@ namespace CoreLib.WebApi
             {
                 using HttpResponseMessage response = await client.PutAsJsonAsync(controllerPath, individual);
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<Individual>();
+                var result = await response.Content.ReadFromJsonAsync<Individual>(options: new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
                 return result;
             }
@@ -88,7 +90,7 @@ namespace CoreLib.WebApi
             {
                 using HttpResponseMessage response = await client.DeleteAsync(controllerPath+$"/{individual.Id}");
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<Individual>();
+                var result = await response.Content.ReadFromJsonAsync<Individual>(options: new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
                 return result;
             }

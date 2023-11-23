@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiCoreApp.ContentPages.EditIndividualPage"
+             xmlns:viewModel="clr-namespace:MauiCoreApp.ViewModels"
+            xmlns:model="clr-namespace:CoreLib.Models;assembly=CoreLib"
+            xmlns:conv="clr-namespace:MauiCoreApp.Converters"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+              x:Class="MauiCoreApp.ContentPages.EditIndividualPage"
+             x:DataType="viewModel:EditIndividualViewModel"
              Title="EditIndividualPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <Style TargetType="Slider">
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <conv:StringToColorConverter x:Key="stringToColor"/>
+        <conv:FloatToIntConverter x:Key="floatToInt"/>
+    </ContentPage.Resources>
+    <StackLayout Margin="20">
+        <Button Text="Back" Command="{Binding NavigateBackCommand}"/>
+        <Grid MinimumHeightRequest="100">
+
+        </Grid>
+        <Editor Placeholder="Name" PlaceholderColor="Black" Text="{Binding Individual.Name}" />
+        <Label>Type of Relative</Label>
+        <Picker ItemsSource="{Binding RelativeTypes}" SelectedItem="{Binding Individual.RelativeType}"/>
+        <Grid MinimumHeightRequest="100">
+
+        </Grid>
+        <BoxView Color="{Binding Color}"
+                 HeightRequest="100"
+                 WidthRequest="100"
+                 HorizontalOptions="Center" />
+        <StackLayout Margin="10, 0">
+            <Slider Value="{Binding Red}" />
+            <Label Text="{Binding Red,
+                                  Converter={StaticResource floatToInt},
+                                  ConverterParameter=255,
+                                  StringFormat='Red = {0:X2}'}" />
+            <Slider Value="{Binding Green}" />
+            <Label Text="{Binding Green,
+                                  Converter={StaticResource floatToInt},
+                                  ConverterParameter=255,
+                                  StringFormat='Green = {0:X2}'}" />
+            <Slider Value="{Binding Blue}" />
+            <Label>
+                <Label.Text>
+                    <Binding Path="Blue"
+                             StringFormat="Blue = {0:X2}"
+                             Converter="{StaticResource floatToInt}">
+                        <Binding.ConverterParameter>
+                            <x:Single>255</x:Single>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </Label.Text>
+            </Label>
+        </StackLayout>
+        <Grid MinimumHeightRequest="100">
+
+        </Grid>
+        <Button Text="Save Changes" Background="Green" Command="{Binding SaveChangesCommand}"/>
+        <Grid MinimumHeightRequest="50">
+
+        </Grid>
+        <Button Text="Delete Entity" Background="Red" Command="{Binding DeleteCommand}"/>
+    </StackLayout>
 </ContentPage>

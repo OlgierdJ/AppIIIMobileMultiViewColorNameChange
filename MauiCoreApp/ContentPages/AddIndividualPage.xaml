@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:viewModel="clr-namespace:MauiCoreApp.ViewModels"
+xmlns:model="clr-namespace:CoreLib.Models;assembly=CoreLib"
+xmlns:conv="clr-namespace:MauiCoreApp.Converters"
+xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MauiCoreApp.ContentPages.AddIndividualPage"
+             x:DataType="viewModel:AddIndividualViewModel"
              Title="AddIndividualPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout Margin="20">
+
+
+        <StackLayout Padding="20" Background="Aqua">
+
+            <Button Text="Back" Command="{Binding NavigateBackCommand}"/>
+            <Grid MinimumHeightRequest="100">
+
+            </Grid>
+            <Editor Placeholder="Name" PlaceholderColor="Black" Text="{Binding NewIndividual.Name}" />
+            <Label>Type of Relative</Label>
+            <Picker ItemsSource="{Binding RelativeTypes}" SelectedItem="{Binding NewIndividual.RelativeType}"/>
+            <Grid MinimumHeightRequest="200">
+
+            </Grid>
+            <Button Text="Create" Background="Green" Command="{Binding CreateCommand}"/>
+        </StackLayout>
+
+
+
+    </StackLayout>
 </ContentPage>
