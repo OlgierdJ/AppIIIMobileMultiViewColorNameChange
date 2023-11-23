@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using CoreLib.Models;
+using CoreLib.WebApi;
 using MauiCoreApp.ContentPages;
 using MauiCoreApp.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -18,13 +20,19 @@ namespace MauiCoreApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
                 .UseMauiCommunityToolkit();
+            builder.Services.AddSingleton<IndividualWebApi>();
+            builder.Services.AddSingleton<SignalRClientService>();
+
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
 
             builder.Services.AddTransient<AddIndividualPage>();
             //builder.Services.AddTransient<ViewProcessedNodesViewModel>();
-            builder.Services.AddTransient<RemoveIndividualPage>();
+            builder.Services.AddTransient<EditIndividualPage>();
             //builder.Services.AddTransient<ViewProcessedNodesViewModel>();
+
+            //builder.Services.AddTransient<EditIndividualPage>();
+
             //builder.Services.AddTransient<ViewProcessedNodesPage>();
             //builder.Services.AddTransient<ViewProcessedNodesViewModel>();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiCoreApp.ViewModels
 {
-    internal class RemoveIndividualViewModel
+    internal class EditIndividualViewModel
     {
     }
 }

@@ -18,7 +18,6 @@ namespace MauiCoreApp.ViewModels
         //[NotifyPropertyChangedFor(nameof(IsNotBusy), nameof(CanScrape))]
         private bool isBusy;
         public bool IsNotBusy => !IsBusy;
-
         /// <summary>
         /// List of all the individuals
         /// </summary>
@@ -26,7 +25,7 @@ namespace MauiCoreApp.ViewModels
         List<Individual> individuals;
 
         [RelayCommand]
-        async Task RemoveIndividual()
+        async Task RemoveIndividual(Individual individual)
         {
             await Task.CompletedTask;
         }
@@ -38,7 +37,7 @@ namespace MauiCoreApp.ViewModels
         }
 
         [RelayCommand]
-        async Task NavigateToCreateIndividual()
+        async Task NavigateToAddIndividual()
         {
             await Task.CompletedTask;
         }

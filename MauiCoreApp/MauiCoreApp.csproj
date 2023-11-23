@@ -72,7 +72,7 @@
 	  <MauiXaml Update="ContentPages\AddIndividualPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ContentPages\RemoveIndividualPage.xaml">
+	  <MauiXaml Update="ContentPages\EditIndividualPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
