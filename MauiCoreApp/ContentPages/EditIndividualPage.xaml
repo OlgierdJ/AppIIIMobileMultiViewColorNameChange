@@ -19,15 +19,17 @@
         <conv:StringToColorConverter x:Key="stringToColor"/>
         <conv:FloatToIntConverter x:Key="floatToInt"/>
     </ContentPage.Resources>
+    <ScrollView>
+        
     <StackLayout Margin="20">
         <Button Text="Back" Command="{Binding NavigateBackCommand}"/>
-        <Grid MinimumHeightRequest="100">
+        <Grid MinimumHeightRequest="50">
 
         </Grid>
         <Editor Placeholder="Name" PlaceholderColor="Black" Text="{Binding Individual.Name}" />
         <Label>Type of Relative</Label>
         <Picker ItemsSource="{Binding RelativeTypes}" SelectedItem="{Binding Individual.RelativeType}"/>
-        <Grid MinimumHeightRequest="100">
+        <Grid MinimumHeightRequest="50">
 
         </Grid>
         <BoxView Color="{Binding Color}"
@@ -67,4 +69,5 @@
         </Grid>
         <Button Text="Delete Entity" Background="Red" Command="{Binding DeleteCommand}"/>
     </StackLayout>
+    </ScrollView>
 </ContentPage>

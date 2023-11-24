@@ -39,9 +39,15 @@ namespace CoreLib.WebApi
             {
                 using HttpResponseMessage response = await client.GetAsync(controllerPath);
                 response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<List<Individual>>(options:new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive=true });
+                //var result = await response.Content.ReadFromJsonAsync<List<Individual>>(options:new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive=true });
+                var result = await response.Content.ReadAsStringAsync();
+                var obj = new List<Individual>();
+                if (result != "")
+                {
+                    obj = JsonSerializer.Deserialize<List<Individual>>(result, options: new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
-                return result;
+                }
+                return obj;
             }
             catch (HttpRequestException e)
             {

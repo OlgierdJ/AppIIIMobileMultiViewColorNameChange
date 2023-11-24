@@ -8,6 +8,8 @@ xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MauiCoreApp.ContentPages.AddIndividualPage"
              x:DataType="viewModel:AddIndividualViewModel"
              Title="AddIndividualPage">
+    <ScrollView>
+        
     <StackLayout Margin="20">
 
 
@@ -29,4 +31,5 @@ xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 
 
     </StackLayout>
+    </ScrollView>
 </ContentPage>
